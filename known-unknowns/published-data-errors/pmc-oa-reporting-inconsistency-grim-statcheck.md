@@ -1,0 +1,89 @@
+# PMC open-access articles (2025-2026): a new, rounding-proof GRIM/GRIMMER/DEBIT or statcheck reporting inconsistency
+
+📑 **Errors in published data** · harvest (many cells or partial wins within reach) · tractability ★★★★☆ · compute: laptop-hours (per-article XML from the PMC Cloud Service, tens of KB each; scanning a few thousand articles is minutes of CPU, the time goes into manual vetting of each flag) · open as of 2026-10-14
+
+> 🔒 **Live puzzle with a living setter.** Solve it, but never publish the answer: it goes privately to the setter, and only a salted hash goes in this repo. See [DONT_SPOIL_THE_HUNT.md](../../DONT_SPOIL_THE_HUNT.md).
+
+## The problem
+
+Some published summary statistics are arithmetically impossible given the paper's own stated sample size and measurement scale. Four mechanical tests detect this. GRIM (Brown & Heathers, 'The GRIM Test', Social Psychological and Personality Science 2016, doi:10.1177/1948550616673876): a mean of integer data with N = n x items has granularity 1/N, so a reported mean reachable by no integer total k/N under any rounding is impossible; the test is only informative while N < 10^d (d = reported decimals). GRIMMER (Anaya, PeerJ Preprints 2016, doi:10.7287/peerj.preprints.2400v1; analytic refinement by Allard 2018): the same for the SD given mean and n. DEBIT (Heathers & Brown 2019, https://osf.io/5vb3u/): for binary data the sample SD is fixed by the mean and n. statcheck (Nuijten, Hartgerink, van Assen, Epskamp & Wicherts, Behavior Research Methods 2016, doi:10.3758/s13428-015-0664-2; R package statcheck 1.5.0 on CRAN, web app statcheck.io): recompute p from an APA-reported test statistic and df. Nuijten et al. scanned over 250,000 p-values in eight psychology journals, 1985-2013, and found that half of the NHST papers contained at least one inconsistent p-value and one in eight a grossly inconsistent one. Hartgerink ('688,112 Statistical Results', Data 2016, doi:10.3390/data1030014) mined that era, and in late 2016 statcheck reports on about 50,000 psychology papers were posted to PubPeer in bulk, drawing a public objection from the German Psychological Society; that corpus is already covered. Reusable implementations: scrutiny 0.6.1 (Jung, CRAN 2025-12-02: grim, grimmer, debit with selectable rounding) and rsprite2 0.2.1 (Wallrich, CRAN). The open frontier is recent biomedical and social-science articles in the PubMed Central Open Access Subset, whose legacy bulk FTP packages are gone; per-article files are served by the PMC Cloud Service (S3 bucket pmc-oa-opendata, one folder per PMCID.version with .xml, .txt, .pdf and a .json metadata file carrying is_pmc_openaccess, is_manuscript, is_retracted and license_code; checked 2026-10-14). The vetter found no public registry of which of these articles have been GRIM- or statcheck-tested, and PubPeer, the main venue for such notes, cannot be checked by agents (see pitfalls). A win is a reporting inconsistency, never an accusation: typos, transcription slips, undisclosed exclusions and copy-paste errors are the usual innocent causes.
+
+## What counts as a win
+
+One inconsistency (one table cell or one reported test) in one article, packaged with all of the following. (1) CORPUS: the article version is in the S3 bucket pmc-oa-opendata (https://pmc-oa-opendata.s3.amazonaws.com/<PMCID>.<v>/<PMCID>.<v>.json fetched live at claim time) with is_pmc_openaccess = true, is_manuscript = false, is_retracted = false and license_code starting with 'CC'; its earliest <pub-date> in the JATS XML falls between 2025-01-01 and 2026-09-30; the exact slice (date window, license filter, journal or subject filter, sampling seed) was frozen in PREREG.md before any scanning. (2) SOURCE: DOI, PMCID.version, sha256 of the fetched .xml, the table/section label, row and column, and the raw reported strings exactly as in the XML (read as strings so trailing zeros survive; comma decimals and Unicode minus normalised and noted). (3) STATED n AND SCALE: the n for that cell and the response format (integer range and number of items, or 'binary') are quoted verbatim from the same article; the claim is void if the article says n varies, reports attrition or missing data for that variable without a per-cell n, or if the value is adjusted, weighted, imputed, estimated-marginal or model-based. (4) IMPOSSIBILITY, one of: (A) GRIM: N = n x items < 10^d and no integer k in [N x min, N x max] gives k/N rounding to the reported mean under ANY of round-half-up, round-half-down, round-half-even, truncation and ceiling; for a reported percentage of a count, no integer k in 0..n gives k/n x 100 rounding to it under any of those conventions, informative only while n < 10^(d+2) (scrutiny's percent = TRUE); (B) GRIMMER: mean GRIM-consistent but no integer data set of size n on the stated scale with that mean has a sample SD rounding to the reported SD under any of those conventions, shown by exhaustive enumeration of the possible sums of squares (a failed SPRITE random search does not count); (C) DEBIT: binary variable, and no k in 0..n gives both the reported mean and the reported sample SD (sqrt(n/(n-1) x m(1-m))) under any of those conventions; (D) statcheck, too-small direction only: a t, F (integer df1 and df2), chi-square (integer df), r (df = n-2) or z test reported in APA form with a p-value, where the UPPER end of the reported p's own interval (for 'p = x' with d decimals: x + 1 unit in the last decimal, which covers truncation; for 'p < b': b) is strictly below the MINIMUM one-tailed recomputed p over the statistic's interval [s - 0.5u, s + 1u) (u = one unit in the statistic's last reported decimal, so truncation is covered; the largest statistic is the side that favours the author). Corrections and two-tailing only raise p, so no rounding, tailing or undisclosed multiplicity correction can explain it. A reported p that is too LARGE is never a full win (an undisclosed correction can explain it). The test must not be described anywhere in the article as one-tailed, corrected (Bonferroni, Holm, FDR, Greenhouse-Geisser, Huynh-Feldt, Welch) or non-parametric. (5) INDEPENDENT REPRODUCTION: the same verdict from scrutiny::grim / grimmer / debit with rounding set to each convention above, or from statcheck 1.5.0 on the quoted sentence, AND from a second checker written by the skeptic. (6) CONTROLS ('consistent' = consistent under at least one of the five rounding conventions; 'inconsistent' = under none): the checker reproduces scrutiny's documented examples (grim('5.19', 28) inconsistent, grim('5.19', 32) consistent; debit('0.35', '0.18', 20) inconsistent, debit('0.44', '0.50', 1683) consistent, debit('0.19', '0.35', 1683) inconsistent) and, for 4D, computed with the standard library (p_two = erfc(|z|/sqrt 2); vetter's values on 2026-10-14: z = 1.96 gives two-tailed 0.05000; z = 1.70 gives one-tailed 0.04457, so 'z = 1.70, p < .05' must NOT flag; over [1.495, 1.51) the minimum one-tailed p for z = 1.50 is about 0.0655 (one-tailed 0.06616 at 1.505), so 'z = 1.50, p < .05' MUST flag) and reports zero flags on 10,000 simulated integer data sets (random n 5-200, scale 1-7, 1-5 items) rounded under every convention. (7) NOVELTY: Crossref https://api.crossref.org/works?filter=updates:<DOI> returns no correction, erratum, retraction or expression of concern touching the value; a live web search for the DOI with 'GRIM', 'statcheck', 'PubPeer' and 'erratum' finds no prior report of that value; and the human has checked PubPeer by hand and recorded the result (until then the claim is at most PROMISING with 'PENDING TABLE CHECK: PubPeer'). (8) DISCLOSURE (commit-only here means): the repo receives only a salted hash commitment of (DOI, PMCID.version, location, reported values); the full package stays in private/; the human alone decides whether and how to tell the corresponding author or the journal privately before anything public; agents contact no one and post nothing. WORDING: the package says 'reporting inconsistency' and lists the innocent explanations; it never says fraud, fabrication or misconduct, and never names the article's authors.
+
+## Partial wins
+
+- **p1:** A GRIM-type inconsistency (criterion 4A or 4C) that holds under round-half-up and round-half-even but is rescued by truncation or ceiling, with every other criterion (1-3, 5-8) met; recorded separately because some software truncates.
+- **p2:** A statcheck inconsistency in either direction where the reported p's own rounding interval (or inequality) is disjoint from BOTH the one-tailed and the two-tailed recomputed p intervals over the statistic's interval [s - 0.5u, s + 1u), but which does not meet 4D (for example a reported p that is too large, or an exact p off without a decision change), with criteria 1-3 and 5-8 met and the same exclusions as 4D. Recorded with the explicit caveat that an undisclosed correction can explain a too-large p.
+- **p3:** A clean negative scan: a PREREG-frozen slice of at least 1,000 corpus articles scanned with all four tests, every flag hand-vetted, with the flag counts, the exclusion counts by reason (multi-item, n varies, adjusted, corrected, one-tailed) and the simulated-null false-flag rate reported; this is a measured base rate for that slice, not a finding about any paper.
+
+## How a win is checked
+
+Skeptic re-fetches <PMCID>.<v>.json and .xml from https://pmc-oa-opendata.s3.amazonaws.com/ with plain curl, checks the metadata fields and the sha256, and locates the quoted cell and the quoted n and scale sentences in the XML by string search. Writes an own checker from the method papers (exact Decimal arithmetic, enumeration of k/N or of binary k for GRIM/DEBIT; exhaustive sum-of-squares enumeration for GRIMMER; scipy t/F/chi2/norm survival functions at both ends of the statistic's rounding interval for statcheck), runs it on the controls in criterion 6, then on the claimed values. Cross-checks with scrutiny 0.6.1 (each rounding option) or statcheck 1.5.0. Runs the Crossref updates query (positive control on 2026-10-14: filter=updates:10.1371/journal.pone.0313130 returns 1 item, the correction 10.1371/journal.pone.0318391). Reads the article's methods once more for one-tailed, corrected, adjusted or 'n varies' language. Minutes per claim; the PubPeer check is the human's.
+
+## Is it still open?
+
+Check the status page before you start and again before you claim anything; tables move fast.
+
+- <https://pmc-oa-opendata.s3.amazonaws.com/README.txt>
+
+## Sources
+
+- <https://doi.org/10.1177/1948550616673876>
+- <https://doi.org/10.7287/peerj.preprints.2400v1>
+- <https://osf.io/5vb3u/>
+- <https://doi.org/10.7287/peerj.preprints.26968v1>
+- <https://doi.org/10.3758/s13428-015-0664-2>
+- <https://doi.org/10.3390/data1030014>
+- <https://cran.r-project.org/package=statcheck>
+- <https://statcheck.io>
+- <https://github.com/MicheleNuijten/statcheck>
+- <https://cran.r-project.org/package=scrutiny>
+- <https://search.r-project.org/CRAN/refmans/scrutiny/html/grim.html>
+- <https://search.r-project.org/CRAN/refmans/scrutiny/html/debit.html>
+- <https://cran.r-project.org/package=rsprite2>
+- <https://pmc.ncbi.nlm.nih.gov/tools/pmcaws/>
+- <https://pmc-oa-opendata.s3.amazonaws.com/README.txt>
+- <https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12722777/fullTextXML>
+- <https://retractionwatch.com/?p=43798>
+- <https://retractionwatch.com/wp-content/uploads/2016/10/DGP-Letter.pdf>
+
+## Ideas to start from
+
+Starting points, not instructions. The best wins came from angles nobody listed.
+
+- Pre-filter cheaply: GRIM only bites when N = n x items < 10^d, so keep only tables reporting means of Likert or count items with two decimals and per-cell n under 100 (or three decimals and n under 1,000); this removes most continuous-measure noise before any reading.
+- Baseline-characteristics tables (Table 1) in small clinical and nursing trials report percentages with n per arm; percentage GRIM (k/n x 100 to the reported decimals) and DEBIT on binary items are the cleanest cases because the denominator is the arm n stated in the column header.
+- Run statcheck 1.5.0 on the .txt or a JATS-to-text rendering of each article, then keep only flags that survive criterion 4D (both tails, full statistic rounding interval); this discards the bulk of the one-tailed and rounding false positives statcheck itself warns about.
+- Freeze a deterministic slice in PREREG (for example all 2025 articles whose JSON license_code starts with 'CC' in a named list of psychology, nursing and education journals, sorted by PMCID, first 2,000) so the p3 base rate is reproducible and nobody can cherry-pick.
+- Use the Europe PMC REST API (fullTextXML endpoint per PMCID) as a second, independent fetch of the same article to rule out conversion artefacts in one source.
+
+## Traps
+
+False wins others have fallen for. A claim that walks into one of these will not survive the skeptics.
+
+- Multi-item scales: a mean of a k-item scale has granularity 1/(n x k); treating it as a single item creates false GRIM flags. If the item count is not stated, the cell is excluded, not flagged.
+- The n trap: total n vs per-group n, completers vs randomised, 'n varies due to missing data', valid percent with an unstated denominator. Use only an n printed for that exact cell or column.
+- Rounding conventions: SPSS, R, Excel and journals differ (half-up, half-even, truncation). A flag that one convention rescues is at most partial win p1.
+- Adjusted, weighted, imputed, estimated-marginal and model-based means are continuous; GRIM does not apply. Same for SDs reported as SEs or with population (n) instead of sample (n-1) denominators: check which, and test both before flagging.
+- statcheck false positives: one-tailed tests, Bonferroni/Holm/FDR-adjusted p, Greenhouse-Geisser or Welch non-integer df, 'p = .000', statistics rounded to one decimal, and test statistics copied from a different row. Criterion 4D is built to be immune to these; do not loosen it.
+- SPRITE (Heathers, Anaya, van der Zee & Brown 2018) is a stochastic search: failure to find a matching distribution is HEURISTIC, never proof. Only an exhaustive enumeration or an integer-programming infeasibility certificate counts.
+- scrutiny's grimmer() reference page says not to use its items argument (a known bug); multi-item GRIMMER must use the skeptic's own enumerator. The search.r-project.org reference pages show scrutiny 0.4.0 while CRAN is at 0.6.1; record the version actually run.
+- PubPeer cannot be checked by agents: on 2026-10-14 a plain request to pubpeer.com/search returned HTTP 403 with a Cloudflare 'Just a moment...' challenge, and pubpeer.com/robots.txt disallows ClaudeBot. Under kit/RULES.md rule 5 agents stop there; the PubPeer check is the human's, by hand, before anything is CONFIRMED.
+- The legacy PMC FTP bulk paths are gone (https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/ returned 404 on 2026-10-14; the PMC readme says legacy files were removed in August 2026). Use the PMC Cloud Service bucket. Its README says that accessing the data means accepting NLM's terms (acknowledge NLM as the source, redistribute only licensed data); the human reads them before the first bulk fetch.
+- Ethics: in 2016, bulk statcheck reports posted to PubPeer without the authors' prior knowledge drew a formal objection from the German Psychological Society (background: retractionwatch.com/?p=43798; the society's letter: retractionwatch.com/wp-content/uploads/2016/10/DGP-Letter.pdf). This target is commit-only for that reason: a salted hash of (DOI, PMCID.version, location, values) goes in the repo, the full package stays in private/, and the human decides whether and how to tell the corresponding author or journal privately first. Agents contact no one and post nothing. The package never names the authors and never uses the words fraud, fabrication or misconduct.
+- One inconsistency per claim (kit/RULES.md rule 4). Several flags in one article are several claims, and a paper with many flags is still a set of reporting inconsistencies, not a finding about its authors.
+- Pre-2016 psychology articles in the eight journals of Nuijten et al. 2016, and the corpus of Hartgerink's 688,112-result dataset, are already scanned; a statcheck flag there is a replication, not a win.
+
+## Point your agent at it
+
+```
+set up SUET: https://github.com/Milbaxter/SUET and hunt known-unknowns/published-data-errors/pmc-oa-reporting-inconsistency-grim-statcheck.md
+```
+
+Already set up? Say `run SUET on pmc-oa-reporting-inconsistency-grim-statcheck`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
+
+---
+
+_Generated from [`bank/targets.json`](../../bank/targets.json) (id `pmc-oa-reporting-inconsistency-grim-statcheck`). Found it solved, stale or wrong? Open an issue or a pull request against that file._

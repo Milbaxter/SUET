@@ -1,52 +1,66 @@
 ```
-██╗   ██╗ ██████╗  ██████╗   ██╗ ████████╗ ██╗  ██╗ ███████╗
-██║   ██║ ╚════██╗ ██╔══██╗ ███║ ╚══██╔══╝ ██║  ██║ ██╔════╝
-██║   ██║  █████╔╝ ██████╔╝ ╚██║    ██║    ███████║ ███████╗
-╚██╗ ██╔╝  ╚═══██╗ ██╔══██╗  ██║    ██║    ╚════██║ ╚════██║
- ╚████╔╝  ██████╔╝ ██║  ██║  ██║    ██║         ██║ ███████║
-  ╚═══╝   ╚═════╝  ╚═╝  ╚═╝  ╚═╝    ╚═╝         ╚═╝ ╚══════╝
-    hills no one has climbed · unknowns no one has known
+███████╗ ██╗   ██╗ ███████╗ ████████╗
+██╔════╝ ██║   ██║ ██╔════╝ ╚══██╔══╝
+███████╗ ██║   ██║ █████╗      ██║
+╚════██║ ██║   ██║ ██╔══╝      ██║
+███████║ ╚██████╔╝ ███████╗    ██║
+╚══════╝  ╚═════╝  ╚══════╝    ╚═╝
+      spend · useful · extra · tokens
 ```
 
 <p align="center">
-  <strong>Turn your unused tokens into scientific discoveries.</strong><br>
+  <strong>Your plan's leftover tokens, spent on problems that matter and answers a computer can check.</strong><br>
+  A fork of <a href="https://github.com/elder-plinius/V3R1T4S">V3R1T4S</a> by Pliny the Liberator.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/results-53-brightgreen" alt="53 results" />
   <a href="LICENSING.md"><img src="https://img.shields.io/badge/license-AGPL--3.0_%7C_CC_BY_4.0-blue" alt="AGPL-3.0 code, CC BY 4.0 data" /></a>
 </p>
 
 <p align="center">
-  <a href="#-w1ns"><strong>Wins</strong></a> ·
+  <a href="#-whats-new-in-suet"><strong>What's new</strong></a> ·
   <a href="#-known-unknowns"><strong>Known unknowns</strong></a> ·
-  <a href="#-dont-trust-us-check-it"><strong>Check us</strong></a> ·
+  <a href="#-w1ns"><strong>Inherited wins</strong></a> ·
   <a href="#-j01n-th3-hunt"><strong>Join</strong></a> ·
-  <a href="TROPHY_CASE.md"><strong>Trophy case</strong></a> ·
   <a href="AGENTS.md"><strong>For agents</strong></a>
 </p>
 
-**CIPHERS CRACKED. TABLES BEATEN. BOUNDS PUSHED. 🔓** 
+Most nights your subscription sits idle. SUET points those tokens at open problems where a good answer and a bad
+answer are easy to tell apart: a reproducer either crashes the program or it doesn't, a grid setpoint is either
+feasible and cheaper or it isn't, a reported mean is either possible for that sample size or it isn't.
 
-Unsolved problems, liberated by legions of agents, verified by skeptics, reproducible by anyone. Matrix multiplication with fewer multiplications than any public catalogue, for five matrix shapes. Two unsolved cipher-machine challenges, cracked. The lower bound on Lehmer's 1932 totient problem pushed from 10²⁶ to a computer-verified 10⁵⁰. All from a one-shot routine prompt. And now, the same power is in your hands! May you wield it wisely.
+SUET keeps V3R1T4S's whole machine (the kit, the skeptic panel, `check_run.py`, the bank) and adds categories
+closer to things people use every day.
 
 ### ⚡ Join in one line
 
 Open an agent that can run code and paste:
 
 ```
-set up V3R1T4S: https://github.com/elder-plinius/V3R1T4S
+set up SUET: https://github.com/Milbaxter/SUET
 ```
 
-It asks six short questions, schedules nothing until you type **go** (setup only creates its own folder), and posts nothing without your **yes**. Most nights it finds nothing. Some nights it beats a table entry, and your name goes in the trophy case. Works with Claude Code, Codex, Gemini CLI, Grok Bot, Hermes and more: see [Pick your agent](#-pick-your-agent).
+It asks six short questions, schedules nothing until you type **go** (setup only creates its own folder), and posts
+nothing without your **yes**. Most nights it finds nothing. Works with Claude Code, Codex, Gemini CLI and more: see
+[Pick your agent](#-pick-your-agent).
 
 🤖 Agents: start at [AGENTS.md](AGENTS.md).
 
-> *"Veritas liberabit nos."* The truth will set us free.
+## 🆕 What's new in SUET
 
-⊰•-•✧•-•-⦑/V\E/R\I/T\A/S\⦒-•-•✧•-•⊱
+| Category | Why a computer can judge it | Disclosure |
+|---|---|---|
+| 🐛 [Bugs in critical open source](known-unknowns/critical-oss-bugs/README.md) | the reproducer crashes the latest commit under a sanitizer, or it doesn't | private to maintainers until fixed |
+| 🔌 [Power grids](known-unknowns/power-grids/README.md) | an independent power-flow check says the point is feasible and cheaper, or it isn't | open |
+| 📑 [Errors in published data](known-unknowns/published-data-errors/README.md) | the reported numbers are impossible under every rounding reading, or they aren't | private to authors first |
+| 📻 [Lost signals and formats](known-unknowns/lost-signals-formats/README.md) | a frozen decoder predicts frames received later, or it doesn't | open |
+
+Rules for the two sensitive ones are in [`kit/POLICY.md`](kit/POLICY.md): agents fuzz only code they build
+themselves, never touch running services, never write exploits, never accuse anyone, and never contact anyone.
 
 ## 🏆 W1NS
+
+These are V3R1T4S's results, found before the fork and credited to their finders there. SUET claims none of them.
 
 | Win | Beats | Status |
 |---|---|---|
@@ -79,10 +93,14 @@ F. Comellas' degree–diameter page describes itself as AI-free. These graphs ar
 
 ## 🗺 Known unknowns
 
-The hills nobody has climbed yet: **135 open problems in 13 categories**, each with its own page: what counts as a win, how it's checked, where to confirm it's still open, ideas to start from, and the traps that fooled people before. Pick one and point your agent at it, or let it roam anywhere else.
+The hills nobody has climbed yet: **140 open problems in 17 categories**, each with its own page: what counts as a win, how it's checked, where to confirm it's still open, ideas to start from, and the traps that fooled people before. Pick one and point your agent at it, or let it roam anywhere else.
 
 | Category | Open | For example |
 |---|---|---|
+| 🐛 [Bugs in critical open source](known-unknowns/critical-oss-bugs/README.md) | 2 | a crash in BusyBox, toybox or ncurses, none of which OSS-Fuzz covers |
+| 🔌 [Power grids](known-unknowns/power-grids/README.md) | 1 | a cheaper feasible point than the PGLib-OPF baseline |
+| 📑 [Errors in published data](known-unknowns/published-data-errors/README.md) | 1 | GRIM/statcheck-impossible numbers in 2025–26 open-access papers |
+| 📻 [Lost signals and formats](known-unknowns/lost-signals-formats/README.md) | 1 | the first public decoder for the TORO-3 CubeSat beacon |
 | 🔢 [Number hunts](known-unknowns/number-hunts/README.md) | 19 | the last unresolved Busy Beaver BB(6) machines |
 | 📊 [Record tables](known-unknowns/record-tables/README.md) | 17 | binary linear codes above codetables.de |
 | 🔐 [Unbroken ciphers](known-unknowns/unbroken-ciphers/README.md) | 17 | the remaining unbroken 1941 German Army Enigma messages |
@@ -100,7 +118,7 @@ The hills nobody has climbed yet: **135 open problems in 13 categories**, each w
 Browse them all → [known-unknowns/](known-unknowns/README.md). To aim your agent at one:
 
 ```
-set up V3R1T4S: https://github.com/elder-plinius/V3R1T4S and hunt known-unknowns/<category>/<problem>.md
+set up SUET: https://github.com/Milbaxter/SUET and hunt known-unknowns/<category>/<problem>.md
 ```
 
 ## 🔍 Don't trust us, check it
@@ -163,16 +181,16 @@ You need an agent that can run code: a terminal, a shell tool, or its own cloud 
 | **Hermes Agent** (Nous) | `hermes`, paste the line | Use your strongest model; smaller ones tend to stop early |
 | **OpenClaw** | message it the line | Approve its exec prompts during setup |
 | **Meta Muse** | ask Muse the line | Runs in Muse's own cloud computer, not your laptop |
-| **Cursor, OpenHands, Aider** | open an agent session, paste the line | No scheduler: say "run V3R1T4S" to hunt |
+| **Cursor, OpenHands, Aider** | open an agent session, paste the line | No scheduler: say "run SUET" to hunt |
 | 💬 **Chat-only bots** (@grok on X, chat apps) | paste the link | Can read and explain the repo, can't hunt without a shell |
 
-Got it working somewhere new? [Open an issue](https://github.com/elder-plinius/V3R1T4S/issues) and tell us.
+Got it working somewhere new? [Open an issue](https://github.com/Milbaxter/SUET/issues) and tell us.
 
 </details>
 
 ## ⚠️ Disclaimer
 
-V3R1T4S is provided **as is**, without warranty of any kind (see [LICENSE](LICENSE) and [LICENSE-DATA](LICENSE-DATA)). You run it at your own risk:
+SUET is provided **as is**, without warranty of any kind (see [LICENSE](LICENSE) and [LICENSE-DATA](LICENSE-DATA)). You run it at your own risk:
 
 - **Your agent, your responsibility.** You choose the agent, its permissions and its schedule. Monitor what it does, and stop it if you don't like what you see.
 - **Your costs.** Runs spend your own plan, API credits and compute.
@@ -182,12 +200,4 @@ V3R1T4S is provided **as is**, without warranty of any kind (see [LICENSE](LICEN
 
 The authors and contributors accept no liability for how the software is used or for anything an agent does with it.
 
-⊰•-•✧•-•-⦑/V\E/R\I/T\A/S\⦒-•-•✧•-•⊱
-
-🐉 Siblings: [L1B3RT4S](https://github.com/elder-plinius/L1B3RT4S) · [CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S) · V3R1T4S
-
-#V3R1T4S
-
-*Made with love by Pliny the Liberator <3*
-
-⊰-•-•✧•-•-⦑/L\O/V\E/\P/L\I/N\Y/⦒-•-•✧•-•-⊱
+Forked from [V3R1T4S](https://github.com/elder-plinius/V3R1T4S), made with love by Pliny the Liberator. The kit, the bank and every inherited result are theirs; SUET adds the new categories above.

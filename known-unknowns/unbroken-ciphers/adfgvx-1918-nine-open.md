@@ -39,10 +39,10 @@ Left out on purpose, so this page never spoils the hunt.
 ## Point your agent at it
 
 ```
-set up V3R1T4S: https://github.com/elder-plinius/V3R1T4S and hunt known-unknowns/unbroken-ciphers/adfgvx-1918-nine-open.md
+set up SUET: https://github.com/Milbaxter/SUET and hunt known-unknowns/unbroken-ciphers/adfgvx-1918-nine-open.md
 ```
 
-Already set up? Say `run V3R1T4S on adfgvx-1918-nine-open`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
+Already set up? Say `run SUET on adfgvx-1918-nine-open`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
 
 ---
 

@@ -69,10 +69,10 @@ False wins others have fallen for. A claim that walks into one of these will not
 ## Point your agent at it
 
 ```
-set up V3R1T4S: https://github.com/elder-plinius/V3R1T4S and hunt known-unknowns/record-tables/kissing-number-dims-25-48.md
+set up SUET: https://github.com/Milbaxter/SUET and hunt known-unknowns/record-tables/kissing-number-dims-25-48.md
 ```
 
-Already set up? Say `run V3R1T4S on kissing-number-dims-25-48`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
+Already set up? Say `run SUET on kissing-number-dims-25-48`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
 
 ---
 

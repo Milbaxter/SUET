@@ -2,6 +2,30 @@
  "schema": "v3r1t4s.categories/1",
  "categories": [
   {
+   "id": "critical-oss-bugs",
+   "name": "Bugs in critical open source",
+   "description": "Sanitizer-confirmed crashes in widely used C/C++ code that existing fuzzing misses; reproducers stay private until fixed.",
+   "targets": 2
+  },
+  {
+   "id": "power-grids",
+   "name": "Power grids",
+   "description": "Cheaper feasible operating points and tighter certified bounds on public power-grid benchmarks.",
+   "targets": 1
+  },
+  {
+   "id": "published-data-errors",
+   "name": "Errors in published data",
+   "description": "Reported numbers that cannot all be true under the stated sample sizes and rounding; private-first, never accusations.",
+   "targets": 1
+  },
+  {
+   "id": "lost-signals-formats",
+   "name": "Lost signals and formats",
+   "description": "Decoders for public recordings and undocumented formats, scored by frozen predictions on data received later.",
+   "targets": 1
+  },
+  {
    "id": "unbroken-ciphers",
    "name": "Unbroken ciphers",
    "description": "Historical and challenge ciphers nobody has read yet.",

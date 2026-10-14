@@ -55,10 +55,10 @@ False wins others have fallen for. A claim that walks into one of these will not
 ## Point your agent at it
 
 ```
-set up V3R1T4S: https://github.com/elder-plinius/V3R1T4S and hunt known-unknowns/erdos-and-proofs/erdos-1082i-distinct-distances-general-position.md
+set up SUET: https://github.com/Milbaxter/SUET and hunt known-unknowns/erdos-and-proofs/erdos-1082i-distinct-distances-general-position.md
 ```
 
-Already set up? Say `run V3R1T4S on erdos-1082i-distinct-distances-general-position`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
+Already set up? Say `run SUET on erdos-1082i-distinct-distances-general-position`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.
 
 ---
 

@@ -1,11 +1,11 @@
 # 🗺 Known unknowns
 
-The hills nobody has climbed yet: **135 open problems in 13 categories**. Each page says what the problem is, what counts as a win, how a win is checked, where to check it is still open, ideas to start from, and the traps that produced false wins before.
+The hills nobody has climbed yet: **140 open problems in 17 categories**. Each page says what the problem is, what counts as a win, how a win is checked, where to check it is still open, ideas to start from, and the traps that produced false wins before.
 
 Pick one, then tell your agent:
 
 ```
-set up V3R1T4S: https://github.com/elder-plinius/V3R1T4S and hunt known-unknowns/<category>/<problem>.md
+set up SUET: https://github.com/Milbaxter/SUET and hunt known-unknowns/<category>/<problem>.md
 ```
 
 Or don't pick: your agent can roam anywhere, as long as a stranger's computer can check the answer.
@@ -25,5 +25,9 @@ Or don't pick: your agent can roam anywhere, as long as a stranger's computer ca
 | 🛡️ [ML robustness](ml-robustness/README.md) | 5 | Stronger attacks and soundness counterexamples on public, locally run benchmark models. |
 | 🏺 [Ancient texts and fragments](ancient-texts/README.md) | 4 | Unidentified papyri, tablet fragments, lacunae and sign detection, scored against held-out data. |
 | 🌋 [Herculaneum scrolls](herculaneum-scrolls/README.md) | 4 | Ink detection and surface segmentation on the public Vesuvius Challenge data. |
+| 🐛 [Bugs in critical open source](critical-oss-bugs/README.md) | 2 | Sanitizer-confirmed crashes in widely used C/C++ code that existing fuzzing misses; reproducers stay private until fixed. |
+| 🔌 [Power grids](power-grids/README.md) | 1 | Cheaper feasible operating points and tighter certified bounds on public power-grid benchmarks. |
+| 📑 [Errors in published data](published-data-errors/README.md) | 1 | Reported numbers that cannot all be true under the stated sample sizes and rounding; private-first, never accusations. |
+| 📻 [Lost signals and formats](lost-signals-formats/README.md) | 1 | Decoders for public recordings and undocumented formats, scored by frozen predictions on data received later. |
 
 Tractability, compute and status dates are guesses from the day each page was written; the status page linked on each problem is the only authority. Every page is generated from [`bank/targets.json`](../bank/targets.json): `python3 bank/build_known_unknowns.py`.
