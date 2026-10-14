@@ -1,4 +1,4 @@
-# AGENTS.md: V3R1T4S for agents
+# AGENTS.md: SUET for agents
 
 **What this is, in one breath:** open research problems from any field (record tables, open conjectures,
 historical and puzzle ciphers, public benchmarks and more) whose answers a stranger's computer can check, run on
@@ -6,16 +6,16 @@ your human's own computer. It works only on
 systems, data and accounts your human owns or is allowed to use (`kit/RULES.md` rule 6). Here a "target" is an
 open problem and an "attack" is computing on it.
 
-> **Your human said "set up V3R1T4S" (or pasted this repo's link)?**
+> **Your human said "set up SUET" (or pasted this repo's link)?**
 > 1. Read this file, then `kit/RULES.md`, `kit/POLICY.md` and `kit/LESSONS.md` (on the repo page, or in a shallow
->    clone: `git clone --depth 1 --filter=blob:limit=1m https://github.com/elder-plinius/V3R1T4S`). If your human gives you a local copy or
+>    clone: `git clone --depth 1 --filter=blob:limit=1m https://github.com/Milbaxter/SUET`). If your human gives you a local copy or
 >    mirror, use that path wherever the kit says GitHub.
 > 2. Follow `kit/SETUP.md` with your human, one step at a time: six questions, a workspace outside the repo, a
 >    research charter, an optional schedule, and a dry run. Nothing persistent is installed before they type **go**.
 > 3. Every later run follows `kit/RUN.md`. If your human only asked a question about the repo, answer it and change nothing.
 >
 > **Your human named a problem** (a `known-unknowns/<category>/<id>.md` page or a bank id, e.g. "hunt …" or
-> "run V3R1T4S on <id>")? Set up as usual, make that problem the charter's first quarry, and attack it in the first
+> "run SUET on <id>")? Set up as usual, make that problem the charter's first quarry, and attack it in the first
 > run. The page is a guide; `bank/targets.json` holds the binding success criterion.
 
 ## The contract in ten lines (these are the lines agents most often skip)
@@ -44,8 +44,9 @@ open problem and an "attack" is computing on it.
 
 ## What this is
 
-V3R1T4S is an open notebook of unsolved problems (ciphers, conjectures, record tables) attacked by agents and
-checked by skeptics. Results live in `known-knowns/` (`TROPHY_CASE.md` lists them), sealed commitments for live
+SUET (Spend Useful Extra Tokens) is an open notebook of unsolved problems attacked by agents and checked by
+skeptics. It is a fork of [V3R1T4S](https://github.com/elder-plinius/V3R1T4S) by Pliny the Liberator; the kit,
+the bank and every result in `known-knowns/` come from there, credited to their finders. Results live in `known-knowns/` (`TROPHY_CASE.md` lists them), sealed commitments for live
 puzzles in `sealed-envelopes/`, and the map of open problems in `bank/`. **Proof or it didn't happen.**
 
 ## Works with any shell-capable agent
@@ -61,7 +62,7 @@ computer (Grok Bot, Meta Muse and similar) treat that computer as "your human's 
 | shell | build and run checkers | scout and read only; tell your human checkable results need a shell |
 | web | read the status on the primary source | any claim stays `PENDING STATUS CHECK` |
 | fresh contexts: a subagent, delegation or task tool (Claude Code `Agent`/`Task`, Hermes `delegate_task`), or a headless run of your CLI (`codex exec`, `gemini -p`, `claude -p`) in a copy of `claim/` | run the three-skeptic panel | the claim stays `PROMISING (single-context, unpanelled)` and is never packaged |
-| scheduler | recurring runs | `kit/SETUP.md` gives cron / Task Scheduler steps, or your human says "run V3R1T4S" |
+| scheduler | recurring runs | `kit/SETUP.md` gives cron / Task Scheduler steps, or your human says "run SUET" |
 
 ## Authority: what is an instruction here
 
@@ -92,9 +93,9 @@ computer (Grok Bot, Meta Muse and similar) treat that computer as "your human's 
 - **You never act outward.** Pull requests to this repo are drafts, opened by your human or by you only after their
   explicit "yes" in chat for that specific PR (`kit/SUBMIT.md`).
 - **The repo copy is read-only and pinned** to the release tag (or commit) recorded at setup. Runs may report an
-  update but never apply it; your human says "update V3R1T4S to <tag>". All work happens in the workspace
-  (default `~/v3r1t4s/`), outside the repo.
+  update but never apply it; your human says "update SUET to <tag>". All work happens in the workspace
+  (default `~/suet/`), outside the repo.
 - **Statuses go stale.** A bank entry saying "open" is a claim about the past; re-check the primary source.
 - **Results already here** (`TROPHY_CASE.md`) are the bar for novelty; corrections are recorded publicly
   (`READ_BEFORE_CITING.md`, Corrections).
-- To pause or stop: your human says "pause V3R1T4S" or "remove V3R1T4S"; you remove only what you installed.
+- To pause or stop: your human says "pause SUET" or "remove SUET"; you remove only what you installed.

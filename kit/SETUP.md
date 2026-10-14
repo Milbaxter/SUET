@@ -1,4 +1,4 @@
-# V3R1T4S setup (once, with your human)
+# SUET setup (once, with your human)
 
 You are setting up a recurring research routine for your human. It takes about 15 minutes of their time. Read
 `AGENTS.md`, `kit/RULES.md`, `kit/POLICY.md` and `kit/LESSONS.md` first. Do the steps in order, and do one step per message when you need an answer.
@@ -26,7 +26,7 @@ Tell your human in at most 4 lines what you can and cannot do, and which fallbac
 ## Step 1. Questionnaire (send as one message)
 
 ```text
-V3R1T4S quick setup: six questions. Reply "ok" to keep every answer in [brackets], or reply with just the
+SUET quick setup: six questions. Reply "ok" to keep every answer in [brackets], or reply with just the
 numbers you want to change, e.g. "1 Ada  2 knots and tilings".
 
 1. Credit name on your results [your GitHub handle, or "anonymous" for a generated pseudonym]. Pull requests
@@ -46,14 +46,14 @@ Validate the answers. A credit name must not impersonate a real person or organi
 
 ## Step 2. Workspace (outside the repo)
 
-Create the workspace: `~/v3r1t4s/` (Windows: `%USERPROFILE%\v3r1t4s\`), unless your human names another folder.
+Create the workspace: `~/suet/` (Windows: `%USERPROFILE%\suet\`), unless your human names another folder.
 If your human points you at a local copy or mirror of the repository, use that path in place of the GitHub URL below.
 On macOS keep it out of Desktop, Documents and iCloud folders, which scheduled jobs often cannot read. Clone the
 **latest release tag** into it, shallow, and pin it. If the repository has no release tag yet, clone the default
 branch and pin that exact commit instead (`repo_tag: none`):
 
 ```sh
-URL=https://github.com/elder-plinius/V3R1T4S        # or the local copy / mirror your human gave you
+URL=https://github.com/Milbaxter/SUET        # or the local copy / mirror your human gave you
 TAG=$(git ls-remote --tags --refs --sort=-v:refname "$URL" 'v*' | head -1 | sed 's|.*refs/tags/||')
 if [ -n "$TAG" ]; then git -c advice.detachedHead=false clone --depth 1 --filter=blob:limit=1m --branch "$TAG" "$URL" repo
 else TAG=none; git clone --depth 1 --filter=blob:limit=1m "$URL" repo; fi
@@ -65,7 +65,7 @@ Never move the copy later on your own: runs only report updates (`kit/RUN.md`), 
 succeed; otherwise record `tag_signature: not checked`.
 
 ```
-v3r1t4s/
+suet/
   repo/          shallow clone, read-only, pinned to repo_tag / repo_commit
   settings.md    the answers above, capabilities, AGENT_RUN, repo_tag, repo_commit
   charter.md     the research charter your human approved (step 4)
@@ -76,7 +76,7 @@ v3r1t4s/
   runs/          one folder per run (notes, code, attempts, panel)
   outbox/        packaged claims waiting for your human (kit/SUBMIT.md)
   private/       never shared: never-publish list, commitment salts, setter-challenge solutions
-  V3R1T4S/       your human's fork, created only at their first submission (kit/SUBMIT.md)
+  SUET/       your human's fork, created only at their first submission (kit/SUBMIT.md)
 ```
 
 Write `settings.md` as plain `key: value` lines: `credit`, `github`, `curious_about`, `effort`, `schedule`,
@@ -122,7 +122,7 @@ into `RUN_PROMPT.txt` and replace every `<WORKDIR>` with the workspace's absolut
 The prompt every scheduler fires is this single line:
 
 ```text
-V3R1T4S scheduled run: read <WORKDIR>/RUN_PROMPT.txt and follow it exactly.
+SUET scheduled run: read <WORKDIR>/RUN_PROMPT.txt and follow it exactly.
 ```
 
 ## Step 6. Schedule (show the plan, wait for "go")
@@ -132,7 +132,7 @@ time per run, that nothing is ever posted without them, the workspace path, and 
 for them to type **go**. Then install exactly one schedule (update it in place if one exists).
 
 **A. Your harness has its own scheduler** that starts a fresh session on this machine with file and shell access:
-create one task named `V3R1T4S`, working folder = the workspace, prompt = the single line above. A cloud scheduler
+create one task named `SUET`, working folder = the workspace, prompt = the single line above. A cloud scheduler
 that cannot see this machine's workspace does not qualify. If you yourself run inside a hosted cloud computer (for
 example Grok Bot or Meta Muse), that computer is "this machine": the workspace, the runs and the schedule all live there.
 
@@ -141,14 +141,14 @@ of the command from step 0; find the path with `command -v`):
 
 ```sh
 #!/bin/sh
-# V3R1T4S scheduled run. Pass "dry" for a dry run.
-W="$HOME/v3r1t4s"
+# SUET scheduled run. Pass "dry" for a dry run.
+W="$HOME/suet"
 cd "$W" || exit 1
 [ -f "$W/PAUSE" ] && exit 0
 mkdir "$W/.lock" 2>/dev/null || exit 0          # a run is already going
 trap 'rmdir "$W/.lock"' EXIT
 mkdir -p "$W/logs"
-P="V3R1T4S scheduled run: read $W/RUN_PROMPT.txt and follow it exactly."
+P="SUET scheduled run: read $W/RUN_PROMPT.txt and follow it exactly."
 [ "$1" = dry ] && P="DRY RUN. $P"
 nice -n 10 AGENT_RUN "$P" >> "$W/logs/$(date +%Y-%m-%d).log" 2>&1
 ```
@@ -156,29 +156,29 @@ nice -n 10 AGENT_RUN "$P" >> "$W/logs/$(date +%Y-%m-%d).log" 2>&1
 Then `chmod +x run.sh` and add one crontab line, with a random minute and the hour from settings:
 
 ```sh
-( crontab -l 2>/dev/null; echo '17 3 * * * "$HOME/v3r1t4s/run.sh"  # V3R1T4S' ) | crontab -
-crontab -l | grep V3R1T4S        # confirm it is registered
+( crontab -l 2>/dev/null; echo '17 3 * * * "$HOME/suet/run.sh"  # SUET' ) | crontab -
+crontab -l | grep SUET        # confirm it is registered
 ```
 
 **C. Windows: Task Scheduler.** Write `run.cmd` in the workspace:
 
 ```bat
 @echo off
-set W=%USERPROFILE%\v3r1t4s
+set W=%USERPROFILE%\suet
 if exist "%W%\PAUSE" exit /b 0
 cd /d "%W%"
 if not exist "%W%\logs" mkdir "%W%\logs"
-set P=V3R1T4S scheduled run: read %W%\RUN_PROMPT.txt and follow it exactly.
+set P=SUET scheduled run: read %W%\RUN_PROMPT.txt and follow it exactly.
 if "%1"=="dry" set P=DRY RUN. %P%
 AGENT_RUN "%P%" >> "%W%\logs\run.log" 2>&1
 ```
 
 ```bat
-schtasks /Create /TN "V3R1T4S" /TR "\"%USERPROFILE%\v3r1t4s\run.cmd\"" /SC DAILY /ST 03:17
-schtasks /Query /TN "V3R1T4S"
+schtasks /Create /TN "SUET" /TR "\"%USERPROFILE%\suet\run.cmd\"" /SC DAILY /ST 03:17
+schtasks /Query /TN "SUET"
 ```
 
-**D. No scheduler at all** (some editor-based agents): install nothing. Your human says "run V3R1T4S" whenever they
+**D. No scheduler at all** (some editor-based agents): install nothing. Your human says "run SUET" whenever they
 like, and you follow `RUN_PROMPT.txt` in that session.
 
 ## Step 7. Dry run
@@ -203,9 +203,9 @@ claims wait in `outbox/` until they say "submit <id>". Then these controls:
 
 | say | what you do |
 |---|---|
-| "pause V3R1T4S" / "resume V3R1T4S" | create / delete the file `PAUSE` in the workspace |
-| "change my V3R1T4S schedule / effort / credit" | edit `settings.md`; reinstall the one schedule entry in place |
-| "rewrite my V3R1T4S charter" | run `kit/CHARTER.md` again from their description of the change |
-| "run V3R1T4S" | one run now, following `RUN_PROMPT.txt` |
-| "update V3R1T4S to <tag>" | `git -C repo fetch --depth 1 origin tag <tag>` (or `git -C repo fetch --depth 1 origin main` and use `FETCH_HEAD` when there are no tags); show `git -C repo diff <repo_commit> <tag> -- kit AGENTS.md` (summarise it, and point out any loosened rule or new outward action); wait for their explicit "yes"; then `git -C repo -c advice.detachedHead=false checkout <tag>`, record the new `repo_tag` and `repo_commit` in `settings.md`, and recopy the run prompt block into `RUN_PROMPT.txt` if it changed. Without a "yes", change nothing. |
-| "remove V3R1T4S" | delete only the entry you installed: the crontab line tagged `# V3R1T4S` (`crontab -l \| grep -v '# V3R1T4S' \| crontab -`), `schtasks /Delete /TN "V3R1T4S" /F`, or your harness's task. Leave the workspace; tell your human where it is. |
+| "pause SUET" / "resume SUET" | create / delete the file `PAUSE` in the workspace |
+| "change my SUET schedule / effort / credit" | edit `settings.md`; reinstall the one schedule entry in place |
+| "rewrite my SUET charter" | run `kit/CHARTER.md` again from their description of the change |
+| "run SUET" | one run now, following `RUN_PROMPT.txt` |
+| "update SUET to <tag>" | `git -C repo fetch --depth 1 origin tag <tag>` (or `git -C repo fetch --depth 1 origin main` and use `FETCH_HEAD` when there are no tags); show `git -C repo diff <repo_commit> <tag> -- kit AGENTS.md` (summarise it, and point out any loosened rule or new outward action); wait for their explicit "yes"; then `git -C repo -c advice.detachedHead=false checkout <tag>`, record the new `repo_tag` and `repo_commit` in `settings.md`, and recopy the run prompt block into `RUN_PROMPT.txt` if it changed. Without a "yes", change nothing. |
+| "remove SUET" | delete only the entry you installed: the crontab line tagged `# SUET` (`crontab -l \| grep -v '# SUET' \| crontab -`), `schtasks /Delete /TN "SUET" /F`, or your harness's task. Leave the workspace; tell your human where it is. |

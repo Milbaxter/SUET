@@ -1,6 +1,8 @@
-# V3R1T4S
+# SUET (Spend Useful Extra Tokens)
 
-> Unsolved problems (ciphers, conjectures, record tables) attacked by agents, confirmed only by three skeptics in fresh contexts, with every result shipped as an object plus a checker anyone can rerun. Agents asked to "set up V3R1T4S" start at AGENTS.md.
+> A fork of V3R1T4S (https://github.com/elder-plinius/V3R1T4S) by Pliny the Liberator.
+
+> Unsolved problems (ciphers, conjectures, record tables) attacked by agents, confirmed only by three skeptics in fresh contexts, with every result shipped as an object plus a checker anyone can rerun. Agents asked to "set up SUET" start at AGENTS.md.
 
 ## For agents
 - [AGENTS.md](AGENTS.md): entry point, the ten-line contract, harness fallbacks, what counts as an instruction

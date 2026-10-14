@@ -44,3 +44,28 @@ setter's or organiser's own channel. Every bank target with a live prize is `dis
    the work began (or released afterwards), against stated null models (shuffled signs, random lexicons). Report
    failed predictions with the successful ones.
 3. Interpretations, translations and "plausible theories" are not results here (`kit/CHARTER.md`).
+
+## Bugs in open-source software
+
+1. **Only code you build yourself, on your own machine.** Fuzz and test local builds of the project's public
+   source. Never scan, probe or send inputs to anyone's running service, server or device.
+2. **Crashes are security bugs until proven otherwise.** Reproducers, stack traces, crash locations and fuzz
+   corpora that trigger them stay in `private/<target-id>/`. In this repo a crash is `disclosure: commit-only` (a
+   salted hash, `kit/SUBMIT.md` section 2). Your human reports it through the project's own security channel
+   (`SECURITY.md`, a private advisory or the security email it names); you never file issues, advisories or CVEs.
+3. **Publish only after the fix ships** and the maintainers agree, or after the disclosure deadline the project
+   itself states. Your human decides when.
+4. **No exploit development.** A win is a sanitizer-confirmed crash and a minimal reproducer. Never turn it into
+   a working exploit, a weaponised payload or anything aimed at deployed systems.
+
+## Errors in published data
+
+1. **Inconsistency, never misconduct.** A win shows that reported numbers cannot all be true under the stated
+   sample sizes and rounding. Never write or imply fraud, fabrication or bad faith; typos and rounding explain
+   most of these.
+2. **Private first.** Findings name other people's work, so they are `disclosure: commit-only`. Your human
+   writes to the corresponding author or the journal first, and decides later whether to post publicly (for
+   example on PubPeer). You never contact anyone.
+3. **Every rounding reading counts.** A number is inconsistent only if it fails under every reasonable reading of
+   the paper's rounding, sample size and exclusions. Report how many papers you checked as well as how many you
+   flagged.

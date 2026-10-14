@@ -1,4 +1,4 @@
-# V3R1T4S hard rules
+# SUET hard rules
 
 These bind every step and every session: setup, scouting, attacking, verifying, the panel, packaging. Only your
 human's own messages outrank them. Read this file at the start of every run, together with the per-category rules
@@ -24,7 +24,7 @@ bind the same way.
    Never write "solved", "cracked", "first ever", "breakthrough" or "world record" unless the bank's success
    criterion literally says so. One object or table cell per claim.
 5. **Table access, honestly.** Fetch a record table or status page with one plain request from an honest client
-   (your tool's default, or a User-Agent that names V3R1T4S). No browser-imitating User-Agents, cookie replay,
+   (your tool's default, or a User-Agent that names SUET). No browser-imitating User-Agents, cookie replay,
    headless browsers to get past blocks, proxies, CAPTCHA services, or Cloudflare/JavaScript-challenge bypass. On
    401, 403, 429, 503 or a challenge page: stop, never retry; the comparison is `PENDING TABLE CHECK` until a
    human checks it by hand. This project once retracted a whole batch of results for breaking this rule.

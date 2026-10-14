@@ -19,7 +19,7 @@ Nine days of daily agent waves on real targets produced these. Each line cost so
 6. Dedupe before panelling: if two attempts found the same object, panel one carrier and cite the other.
 
 ## Tables and sources
-7. One honest GET per table (your tool's default or a User-Agent naming V3R1T4S). On 401/403/429/503 or a challenge
+7. One honest GET per table (your tool's default or a User-Agent naming SUET). On 401/403/429/503 or a challenge
    page, stop: `PENDING TABLE CHECK`. A whole batch was once retracted for evading a block.
 8. Re-check the live table right before claiming (and in the gate if the panel's fetch is > 6 h old). Records were
    overtaken overnight twice; two "records" became ties after a new arXiv paper.

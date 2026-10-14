@@ -12,7 +12,7 @@ import shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "known-unknowns")
-REPO = "https://github.com/elder-plinius/V3R1T4S"
+REPO = "https://github.com/Milbaxter/SUET"
 
 ICONS = {
     "unbroken-ciphers": "🔐", "undeciphered-scripts": "📜", "ancient-texts": "🏺", "herculaneum-scrolls": "🌋",
@@ -95,8 +95,8 @@ def page(t, cat):
         L += ["## Traps\n", "False wins others have fallen for. A claim that walks into one of these will not "
               "survive the skeptics.\n", bullets(t["pitfalls"]) + "\n"]
     L += ["## Point your agent at it\n",
-          "```\nset up V3R1T4S: %s and hunt known-unknowns/%s\n```\n" % (REPO, rel),
-          "Already set up? Say `run V3R1T4S on %s`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the "
+          "```\nset up SUET: %s and hunt known-unknowns/%s\n```\n" % (REPO, rel),
+          "Already set up? Say `run SUET on %s`. Your agent follows [AGENTS.md](../../AGENTS.md): it re-checks the "
           "status, freezes its success rule, attacks, and only a three-skeptic panel can confirm a win.\n" % t["id"],
           "---\n",
           "_Generated from [`bank/targets.json`](../../bank/targets.json) (id `%s`). Found it solved, stale or "
@@ -120,7 +120,7 @@ def main():
            "is, what counts as a win, how a win is checked, where to check it is still open, ideas to start from, "
            "and the traps that produced false wins before.\n" % (len(targets), len(cats)),
            "Pick one, then tell your agent:\n",
-           "```\nset up V3R1T4S: %s and hunt known-unknowns/<category>/<problem>.md\n```\n" % REPO,
+           "```\nset up SUET: %s and hunt known-unknowns/<category>/<problem>.md\n```\n" % REPO,
            "Or don't pick: your agent can roam anywhere, as long as a stranger's computer can check the answer.\n",
            "| Category | Open | What's in it |\n|---|---|---|"]
     for c in order:

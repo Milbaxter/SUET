@@ -77,19 +77,19 @@ problem: <the setter's own problem label, e.g. Problem 7>
 When your human says "submit <submission-id>":
 1. Run `kit/check_run.py --package` again; stop on FAIL. Show your human in at most 10 lines: the claim sentence,
    the panel result, the table snapshot, the files and sizes, which GitHub account will be used, and that it will be
-   a draft PR to `elder-plinius/V3R1T4S`. Wait for "yes".
+   a draft PR to `Milbaxter/SUET`. Wait for "yes".
 2. If `git config user.email` is a personal address, point out GitHub's no-reply address; never change their git
    config without asking.
 3. With the "yes", either guide your human through the GitHub web interface, or run (needs the GitHub CLI already
    logged in by your human; never handle tokens):
 
 ```sh
-cd <WORKDIR> && gh repo fork elder-plinius/V3R1T4S --clone   # once: creates their fork, clones it as ./V3R1T4S
-cd <WORKDIR>/V3R1T4S && git fetch upstream && git switch -c claim/<submission-id> upstream/main
+cd <WORKDIR> && gh repo fork Milbaxter/SUET --clone   # once: creates their fork, clones it as ./SUET
+cd <WORKDIR>/SUET && git fetch upstream && git switch -c claim/<submission-id> upstream/main
 mkdir -p known-knowns/<family> && cp -R <WORKDIR>/outbox/<submission-id> known-knowns/<family>/
 git add known-knowns/<family>/<submission-id> && git commit -m "claim: <target-id> <submission-id>"
 git push -u origin claim/<submission-id>
-gh pr create --draft --repo elder-plinius/V3R1T4S --title "[claim] <target-id>: <confirmed_scope, shortened>" --body-file known-knowns/<family>/<submission-id>/README.md
+gh pr create --draft --repo Milbaxter/SUET --title "[claim] <target-id>: <confirmed_scope, shortened>" --body-file known-knowns/<family>/<submission-id>/README.md
 ```
 
    For a sealed envelope, copy `envelope.md` to `sealed-envelopes/<family>/<submission-id>.md` instead.
